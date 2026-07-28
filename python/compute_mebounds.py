@@ -1,0 +1,174 @@
+"""Mebounds: rebounds a player grabs off their own missed shot.
+
+Definition used here: an offensive rebound (ESPN type_id 156) credited to a
+player, where the most recent live event in the same game and period is a
+missed shot attempt (field goal or free throw) by that same player. The
+lookback skips administrative rows (substitutions, timeouts, replay reviews,
+end-of-period markers) but nothing else -- a jumpball or any other live event
+between the miss and the board breaks the link.
+
+Data: sportsdataverse ESPN play-by-play parquet dumps (wehoop / hoopR), same
+schema for both leagues. Regular season only (season_type == 2).
+"""
+
+from pathlib import Path
+
+import polars as pl
+
+DATA = Path(__file__).resolve().parent.parent / "data"
+OUT = Path(__file__).resolve().parent.parent / "output"
+OUT.mkdir(exist_ok=True)
+
+OREB, DREB = 156, 155
+ADMIN_TYPES = (
+    "Substitution",
+    "Full Timeout",
+    "Short Timeout",
+    "Official Timeout",
+    "End Period",
+    "End Game",
+    "Coach's Challenge (Overturned)",
+    "Coach's Challenge (Upheld)",
+    "Coach's Challenge (Stands)",
+    "Ref-Initiated Review (Overturned)",
+    "Ref-Initiated Review (Upheld)",
+    "Ref-Initiated Review (Stands)",
+    "Instant Replay",
+)
+MAX_LOOKBACK = 3  # previous live event plus up to two admin rows skipped
+
+
+def mebound_flags(pbp: pl.DataFrame) -> pl.DataFrame:
+    """Return offensive-rebound rows flagged as mebounds (or not)."""
+    pbp = pbp.sort(["game_id", "game_play_number"])
+    admin = pl.col("type_text").is_in(ADMIN_TYPES)
+
+    cols = {}
+    for k in range(1, MAX_LOOKBACK + 1):
+        for c in ("shooting_play", "scoring_play", "athlete_id_1", "period_number", "type_text"):
+            cols[f"p{k}_{c}"] = pl.col(c).shift(k).over("game_id")
+    pbp = pbp.with_columns(**cols)
+
+    # Walk back: the first non-admin row must be the miss.
+    miss_athlete = pl.lit(None, dtype=pl.Int32)
+    miss_is_ft = pl.lit(None, dtype=pl.Boolean)
+    found = pl.lit(False)
+    for k in range(MAX_LOOKBACK, 0, -1):
+        k_admin = pl.col(f"p{k}_type_text").is_in(ADMIN_TYPES)
+        k_live = pl.col(f"p{k}_type_text").is_not_null() & ~k_admin
+        k_is_miss = (
+            k_live
+            & pl.col(f"p{k}_shooting_play")
+            & ~pl.col(f"p{k}_scoring_play")
+            & (pl.col(f"p{k}_period_number") == pl.col("period_number"))
+        )
+        # Closer rows override farther ones; a closer live non-miss row clears the slate.
+        miss_athlete = (
+            pl.when(k_is_miss).then(pl.col(f"p{k}_athlete_id_1"))
+            .when(k_live).then(pl.lit(None, dtype=pl.Int32))
+            .otherwise(miss_athlete)
+        )
+        miss_is_ft = (
+            pl.when(k_is_miss).then(pl.col(f"p{k}_type_text").str.contains("Free Throw"))
+            .when(k_live).then(pl.lit(None, dtype=pl.Boolean))
+            .otherwise(miss_is_ft)
+        )
+
+    orebs = pbp.filter((pl.col("type_id") == OREB) & pl.col("athlete_id_1").is_not_null())
+    return orebs.with_columns(
+        (pl.col("athlete_id_1") == miss_athlete).fill_null(False).alias("mebound"),
+        miss_is_ft.alias("miss_was_ft"),
+    )
+
+
+def season_summary(league: str, year: int) -> tuple[pl.DataFrame, pl.DataFrame]:
+    """Per-player rebound/mebound counts and box-score validation frame."""
+    pbp = pl.read_parquet(DATA / f"{league}_pbp_{year}.parquet").filter(pl.col("season_type") == 2)
+    box = pl.read_parquet(DATA / f"{league}_player_box_{year}.parquet").filter(
+        pl.col("season_type") == 2
+    )
+
+    reb_rows = pbp.filter(
+        pl.col("type_id").is_in([OREB, DREB]) & pl.col("athlete_id_1").is_not_null()
+    )
+    reb = reb_rows.group_by("athlete_id_1").agg(
+        pl.len().alias("pbp_rebounds"),
+        (pl.col("type_id") == OREB).sum().alias("pbp_orebs"),
+    )
+
+    me = mebound_flags(pbp).group_by("athlete_id_1").agg(
+        pl.col("mebound").sum().alias("mebounds"),
+        (pl.col("mebound") & pl.col("miss_was_ft")).sum().alias("mebounds_ft"),
+    )
+
+    names = box.group_by("athlete_id").agg(
+        pl.col("athlete_display_name").last().alias("player"),
+        pl.col("team_abbreviation").last().alias("team"),
+        pl.len().alias("games"),
+        pl.col("rebounds").sum().alias("box_rebounds"),
+        pl.col("offensive_rebounds").sum().alias("box_orebs"),
+    )
+
+    out = (
+        names.join(reb, left_on="athlete_id", right_on="athlete_id_1", how="left")
+        .join(me, left_on="athlete_id", right_on="athlete_id_1", how="left")
+        .with_columns(pl.col("pbp_rebounds", "pbp_orebs", "mebounds", "mebounds_ft").fill_null(0))
+        .with_columns(
+            (pl.col("mebounds") / pl.col("pbp_rebounds")).round(4).alias("mebound_share_of_reb"),
+            (pl.col("mebounds") / pl.col("pbp_orebs")).round(4).alias("mebound_share_of_oreb"),
+        )
+        .sort("mebounds", descending=True)
+    )
+
+    check = out.select(
+        (pl.col("pbp_rebounds") - pl.col("box_rebounds")).abs().sum().alias("abs_reb_diff"),
+        pl.col("box_rebounds").sum().alias("box_total"),
+        pl.col("pbp_rebounds").sum().alias("pbp_total"),
+    )
+    return out, check
+
+
+def main() -> None:
+    frames = []
+    for league, years in (("wnba", (2024, 2025, 2026)), ("nba", (2024, 2025, 2026))):
+        for year in years:
+            out, check = season_summary(league, year)
+            label = f"{year - 1}-{str(year)[2:]}" if league == "nba" else str(year)
+            out = out.with_columns(pl.lit(league.upper()).alias("league"), pl.lit(label).alias("season"))
+            frames.append(out)
+            c = check.row(0, named=True)
+            print(
+                f"{league.upper()} {label}: pbp rebounds {c['pbp_total']} vs box {c['box_total']} "
+                f"(sum abs per-player diff {c['abs_reb_diff']})"
+            )
+
+    all_out = pl.concat(frames)
+    all_out.write_parquet(OUT / "mebounds_by_player_season.parquet")
+
+    reese = all_out.filter(pl.col("player") == "Angel Reese").select(
+        "season", "team", "games", "box_rebounds", "pbp_rebounds", "pbp_orebs",
+        "mebounds", "mebounds_ft", "mebound_share_of_reb", "mebound_share_of_oreb",
+    )
+    reese.write_csv(OUT / "angel_reese_mebounds.csv")
+    print("\nAngel Reese by season (regular season):")
+    print(reese)
+
+    for league in ("WNBA", "NBA"):
+        top = (
+            all_out.filter(pl.col("league") == league)
+            .sort(["season", "mebounds"], descending=[False, True])
+            .group_by("season", maintain_order=True)
+            .head(10)
+            .select(
+                "season", "player", "team", "games", "pbp_rebounds", "pbp_orebs",
+                "mebounds", "mebound_share_of_reb", "mebound_share_of_oreb",
+            )
+        )
+        top.write_csv(OUT / f"{league.lower()}_top_mebounders.csv")
+        print(f"\n{league} top 10 mebounders per season:")
+        with pl.Config(tbl_rows=40):
+            print(top)
+
+
+if __name__ == "__main__":
+    main()
