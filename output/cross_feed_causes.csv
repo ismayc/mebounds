@@ -1,0 +1,67 @@
+league,season,cause,flagged_in,player,gameId,period,secs,detail
+NBA,2023-24,attribution: other player,ESPN,Bryce McGowens,0022300009,4,662.0,NBA credits another player: 537 662s Richards REBOUND (Off:3 Def:3)
+NBA,2023-24,attribution: other player,ESPN,Moussa Diabate,0022300014,4,675.0,NBA credits another player: 618 675s Brown REBOUND (Off:1 Def:0)
+NBA,2023-24,attribution: other player,ESPN,Collin Gillespie,0022300182,3,32.1,NBA credits another player: 451 32.3s Braun REBOUND (Off:1 Def:0)
+NBA,2023-24,attribution: other player,NBA,Christian Braun,0022300182,3,32.3,ESPN credits another player: 320 32.1s Collin Gillespie offensive rebound
+NBA,2023-24,attribution: other player,ESPN,Moses Moody,0022300769,4,327.0,NBA credits another player: 591 327s Green REBOUND (Off:2 Def:8)
+NBA,2023-24,attribution: other player,ESPN,Paolo Banchero,0022300778,3,621.0,NBA credits another player: 299 621s Houstan REBOUND (Off:1 Def:0)
+NBA,2023-24,attribution: other player,ESPN,Trey Lyles,0022300908,2,604.0,NBA credits another player: 185 604s Ellis REBOUND (Off:2 Def:0)
+NBA,2023-24,attribution: other player,ESPN,Bojan Bogdanovic,0022300975,4,376.0,NBA credits another player: 597 376s Anunoby REBOUND (Off:1 Def:3)
+NBA,2023-24,attribution: team rebound,ESPN,Bam Adebayo,0022300779,4,212.0,NBA credits the team: 557 212s Heat Rebound
+NBA,2023-24,attribution: team rebound,NBA,Luka Doncic,0022300978,4,612.0,ESPN credits the team: 388 612s Mavericks offensive team rebound
+NBA,2023-24,missing event,ESPN,Giannis Antetokounmpo,0022300075,4,239.0,ESPN has a rebound by the player at 239s [438 239s Giannis Antetokounmpo offensive rebound] that NBA lacks
+NBA,2023-24,missing event,NBA,Dennis Schroder,0022300189,1,556.0,NBA has a rebound by the player at 556s [28 556s Schroder REBOUND (Off:1 Def:0)] that ESPN lacks
+NBA,2023-24,missing event,NBA,Cole Anthony,0022300282,1,98.0,NBA has a rebound by the player at 98s [735 98s Anthony REBOUND (Off:1 Def:0)] that ESPN lacks
+NBA,2023-24,missing event,ESPN,Peyton Watson,0022300340,3,169.0,ESPN has a rebound by the player at 169s [326 169s Peyton Watson offensive rebound] that NBA lacks
+NBA,2023-24,missing event,ESPN,Jonas Valanciunas,0022300345,2,232.0,ESPN has a rebound by the player at 232s [203 232s Jonas Valanciunas offensive rebound] that NBA lacks
+NBA,2023-24,missing event,NBA,Craig Porter Jr.,0022300735,4,100.0,NBA has a rebound by the player at 100s [643 100s Porter Jr. REBOUND (Off:1 Def:0)] that ESPN lacks
+NBA,2023-24,missing event,ESPN,Zach Collins,0022300785,4,232.0,NBA has [637 233s MISS Mamukelashvili 3' Tip Layup Shot] between the miss and the rebound; ESPN lacks it
+NBA,2023-24,missing event,NBA,Amen Thompson,0022300957,4,132.0,NBA has a rebound by the player at 132s [679 132s Thompson REBOUND (Off:5 Def:5)] that ESPN lacks
+NBA,2023-24,missing event,NBA,Rudy Gobert,0022301014,2,22.9,NBA has a rebound by the player at 22.9s [610 22.9s Gobert REBOUND (Off:4 Def:6)] that ESPN lacks
+NBA,2023-24,ordering,ESPN,Jonathan Kuminga,0022300852,2,6.1,NBA puts [394 9s MISS Curry 28' 3PT Pullup Jump Shot] between the miss and the rebound; ESPN has the same event in another position
+NBA,2023-24,ordering,NBA,Brandin Podziemski,0022301222,5,1.0,ESPN puts [572 2s Dario Saric offensive rebound] between the miss and the rebound; NBA has the same event in another position
+NBA,2024-25,attribution: other player,NBA,Naz Reid,0022400422,2,346.0,ESPN credits another player: 172 347s Jabari Smith Jr. defensive rebound
+NBA,2024-25,attribution: other player,NBA,Noah Clowney,0022400546,5,52.1,ESPN credits another player: 504 52s Tyrese Martin offensive rebound | 506 52s Tyrese Martin offensive rebound
+NBA,2024-25,attribution: other player,NBA,Isaiah Collier,0022400843,2,81.0,ESPN credits another player: 211 81s Keyonte George offensive rebound
+NBA,2024-25,attribution: other player,ESPN,Tre Jones,0022400956,4,136.0,NBA credits another player: 630 136s Collins REBOUND (Off:2 Def:7)
+NBA,2024-25,attribution: shooter,ESPN,Yves Missi,0022400354,3,342.0,ESPN credits the miss to the rebounder [303 343s Yves Missi misses two point shot]; NBA to another player [436 343s MISS Boston 3' Driving Finger Roll Layup]
+NBA,2024-25,attribution: shooter,ESPN,Jonas Valanciunas,0022401009,3,453.0,ESPN credits the miss to the rebounder [257 454s Jonas Valanciunas misses 27-foot three point jumper]; NBA to another player [379 454s MISS Ellis 27' 3PT Jump Shot]
+NBA,2024-25,attribution: shooter,ESPN,Max Strus,0022401124,4,6.0,ESPN credits the miss to the rebounder [440 7s Chris Paul blocks Max Strus 's 3-foot driving layup]; NBA to another player [625 7.2s MISS Mitchell 3' Driving Layup]
+NBA,2024-25,attribution: team rebound,ESPN,Jrue Holiday,0022400073,2,192.0,NBA credits the team: 291 192s Celtics Rebound
+NBA,2024-25,attribution: team rebound,ESPN,Andre Drummond,0022400380,3,557.0,NBA credits the team: 348 557s 76ers Rebound
+NBA,2024-25,attribution: team rebound,ESPN,Gui Santos,0022400492,4,182.0,NBA credits the team: 627 182s WARRIORS Rebound
+NBA,2024-25,attribution: team rebound,ESPN,Zach Edey,0022400906,2,589.0,NBA credits the team: 225 589s Grizzlies Rebound
+NBA,2024-25,missing event,ESPN,Jakob Poeltl,0022400011,3,368.0,ESPN has a rebound by the player at 368s [316 368s Jakob Poeltl offensive rebound] that NBA lacks
+NBA,2024-25,missing event,NBA,Ben Simmons,0022400022,2,45.7,NBA has a rebound by the player at 45.7s [721 45.7s Simmons REBOUND (Off:2 Def:3)] that ESPN lacks
+NBA,2024-25,missing event,ESPN,Anthony Black,0022400217,3,151.0,ESPN has a rebound by the player at 151s [318 151s Anthony Black offensive rebound] that NBA lacks
+NBA,2024-25,missing event,ESPN,Zaccharie Risacher,0022400323,2,624.0,ESPN has a rebound by the player at 624s [130 624s Zaccharie Risacher offensive rebound] that NBA lacks
+NBA,2024-25,missing event,NBA,Bilal Coulibaly,0022400382,2,222.0,NBA has a rebound by the player at 222s [244 222s Coulibaly REBOUND (Off:1 Def:2)] that ESPN lacks
+NBA,2024-25,missing event,NBA,Cam Whitmore,0022400391,4,54.0,NBA has a rebound by the player at 54s [674 54s Whitmore REBOUND (Off:3 Def:5)] that ESPN lacks
+NBA,2024-25,missing event,NBA,Jaren Jackson Jr.,0022400453,4,36.0,NBA has a rebound by the player at 36s [747 36s Jackson Jr. REBOUND (Off:2 Def:9)] that ESPN lacks
+NBA,2024-25,missing event,NBA,Jarace Walker,0022400525,4,76.0,NBA has a rebound by the player at 76s [659 76s Walker REBOUND (Off:1 Def:1)] that ESPN lacks
+NBA,2024-25,missing event,ESPN,KJ Martin,0022400827,3,431.0,ESPN has a rebound by the player at 431s [286 431s KJ Martin offensive rebound] that NBA lacks
+NBA,2024-25,missing event,NBA,Russell Westbrook,0022400990,2,590.0,NBA has a rebound by the player at 590s [739 590s Westbrook REBOUND (Off:2 Def:0)] that ESPN lacks
+NBA,2024-25,ordering,ESPN,Terry Rozier,0022400501,5,18.1,NBA puts [707 18.7s Rozier Free Throw 2 of 2 (18 PTS)] between the miss and the rebound; ESPN has the same event in another position
+NBA,2025-26,attribution: other player,ESPN,Noah Clowney,0022500130,1,128.0,NBA credits another player: 162 128s Sharpe REBOUND (Off:1 Def:1)
+NBA,2025-26,attribution: other player,ESPN,Dylan Cardwell,0022500421,4,395.0,NBA credits another player: 651 395s Achiuwa REBOUND (Off:2 Def:6)
+NBA,2025-26,attribution: other player,NBA,Precious Achiuwa,0022500421,4,395.0,ESPN credits another player: 432 395s Dylan Cardwell offensive rebound
+NBA,2025-26,attribution: other player,NBA,Reed Sheppard,0022500845,3,40.5,ESPN credits another player: 330 40.5s Aaron Holiday offensive rebound
+NBA,2025-26,attribution: other player,NBA,Trayce Jackson-Davis,0022500948,4,8.2,ESPN credits another player: 484 8.2s Jamal Shead offensive rebound
+NBA,2025-26,attribution: other player,NBA,Tobias Harris,0022500993,1,660.0,ESPN credits another player: 11 660s Jalen Duren offensive rebound
+NBA,2025-26,attribution: shooter,NBA,Jimmy Butler III,0022500006,1,30.4,NBA credits the miss to the rebounder [155 31.8s MISS Butler III 8' Floating Jump Shot]; ESPN to another player [96 31.8s Al Horford misses 8-foot two point shot]
+NBA,2025-26,attribution: shooter,NBA,Jerami Grant,0022500841,2,143.0,NBA credits the miss to the rebounder [323 144s MISS Grant 2' Cutting Layup Shot]; ESPN to another player [217 144s Naz Reid blocks Jrue Holiday 's 2-foot driving layup]
+NBA,2025-26,attribution: team rebound,ESPN,Jaime Jaquez Jr.,0022500286,4,364.0,NBA credits the team: 633 364s HEAT Rebound
+NBA,2025-26,attribution: team rebound,ESPN,Marvin Bagley III,0022500311,4,83.0,NBA credits the team: 613 83s WIZARDS Rebound
+NBA,2025-26,attribution: team rebound,ESPN,Jalen Brunson,0022500320,2,262.0,NBA credits the team: 273 262s Knicks Rebound
+NBA,2025-26,attribution: team rebound,NBA,Jarace Walker,0022500795,3,31.0,ESPN credits the team: 371 31s Pacers offensive team rebound
+NBA,2025-26,missing event,NBA,Kevin Durant,0022500054,3,205.0,NBA has a rebound by the player at 205s [676 205s Durant REBOUND (Off:1 Def:5)] that ESPN lacks
+NBA,2025-26,missing event,ESPN,Jimmy Butler III,0022500139,2,549.0,NBA has [199 549s Warriors Rebound] between the miss and the rebound; ESPN lacks it
+NBA,2025-26,missing event,ESPN,Rudy Gobert,0022500232,3,600.0,ESPN has a rebound by the player at 600s [267 600s Rudy Gobert offensive rebound] that NBA lacks
+NBA,2025-26,missing event,NBA,Luke Kennard,0022500267,4,593.0,NBA has a rebound by the player at 593s [523 593s Kennard REBOUND (Off:1 Def:2)] that ESPN lacks
+NBA,2025-26,missing event,ESPN,Luke Kornet,0022500366,1,671.0,ESPN has a rebound by the player at 671s [10 671s Luke Kornet offensive rebound] that NBA lacks
+NBA,2025-26,missing event,ESPN,Deni Avdija,0022500490,4,259.0,ESPN has a rebound by the player at 259s [440 259s Deni Avdija offensive rebound] that NBA lacks
+NBA,2025-26,missing event,ESPN,Yves Missi,0022500567,2,340.0,ESPN has a rebound by the player at 340s [152 340s Yves Missi offensive rebound] that NBA lacks
+NBA,2025-26,missing event,NBA,Onyeka Okongwu,0022500794,2,21.0,NBA has a rebound by the player at 21s [784 21s Okongwu REBOUND (Off:3 Def:2)] that ESPN lacks
+NBA,2025-26,missing event,NBA,Thanasis Antetokounmpo,0022501191,1,95.0,NBA has a rebound by the player at 95s [134 95s T. Antetokounmpo REBOUND (Off:2 Def:0)] that ESPN lacks
+WNBA,2026,attribution: other player,ESPN,Rhyne Howard,1022600113,1,578.0,NBA credits another player: 8 578s Billings REBOUND (Off:0 Def:1)
+WNBA,2026,attribution: other player,NBA,Shakira Austin,1022600172,3,356.0,ESPN credits another player: 260 356s Kiki Iriafen offensive rebound

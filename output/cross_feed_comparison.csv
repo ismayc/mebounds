@@ -1,0 +1,7 @@
+league,season,games_compared,espn_games_unmatched,espn_orebs,nba_orebs,espn_mebounds,nba_mebounds,mebounds_in_both,espn_only,nba_only,agreement_pct,players_espn_unmapped,players_nba_unmapped,mebound_diff,mebound_diff_pct
+NBA,2023-24,1230,0,25952,25824,5583,5578,5570,13,8,99.624,0,0,5,0.09
+NBA,2024-25,1230,0,27351,27258,5583,5579,5570,13,9,99.607,0,0,4,0.072
+NBA,2025-26,1229,0,27972,27833,5569,5570,5559,10,11,99.624,0,0,-1,-0.018
+WNBA,2024,240,0,3937,3927,973,973,973,0,0,100.0,0,0,0,0.0
+WNBA,2025,286,0,4813,4804,1119,1119,1119,0,0,100.0,0,0,0,0.0
+WNBA,2026,202,0,3457,3450,756,756,755,1,1,99.736,0,0,0,0.0
